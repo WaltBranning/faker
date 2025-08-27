@@ -320,7 +320,9 @@ class Provider(BaseProvider):
 
     msisdn_formats: ElementsType[str] = ("#############",)
 
-    def phone_number(self) -> str:
+    def phone_number(self, custom_formats: ElementsType[str] = None) -> str:
+        if custom_formats:
+            return self.numerify(self.random_element(custom_formats))
         return self.numerify(self.random_element(self.formats))
 
     def country_calling_code(self) -> str:
