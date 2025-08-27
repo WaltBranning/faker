@@ -322,6 +322,8 @@ class Provider(BaseProvider):
 
     def phone_number(self, custom_formats: ElementsType[str] = None) -> str:
         if custom_formats:
+            if isinstance(custom_formats, str):
+                custom_formats = (custom_formats)
             return self.numerify(self.random_element(custom_formats))
         return self.numerify(self.random_element(self.formats))
 
