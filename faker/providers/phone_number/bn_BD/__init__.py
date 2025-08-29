@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 from faker.providers.person.bn_BD import translate_to_bengali_digits
 
 from .. import Provider as PhoneNumberProvider
@@ -325,8 +327,8 @@ class Provider(PhoneNumberProvider):
         "+880-###-###-###",
     )
 
-    def phone_number(self) -> str:
-        res = super(self.__class__, self).phone_number()
+    def phone_number(self, custom_formats: Optional[List[str]] = None) -> str:
+        res = super(self.__class__, self).phone_number(custom_formats)
         return translate_to_bengali_digits(res)
 
     def msisdn(self) -> str:

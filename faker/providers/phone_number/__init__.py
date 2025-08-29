@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 from .. import BaseProvider, ElementsType
 
 # Data source
@@ -320,10 +322,10 @@ class Provider(BaseProvider):
 
     msisdn_formats: ElementsType[str] = ("#############",)
 
-    def phone_number(self, custom_formats: ElementsType[str] = None) -> str:
+    def phone_number(self, custom_formats: Optional[List[str]] = None) -> str:
         if custom_formats:
             if isinstance(custom_formats, str):
-                custom_formats = (custom_formats)
+                custom_formats = tuple(custom_formats)
             return self.numerify(self.random_element(custom_formats))
         return self.numerify(self.random_element(self.formats))
 

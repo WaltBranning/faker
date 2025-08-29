@@ -1,3 +1,5 @@
+from typing import List, Optional
+
 from .. import Provider as PhoneNumberProvider
 
 
@@ -89,6 +91,13 @@ class Provider(PhoneNumberProvider):
         pattern: str = self.random_element(self.toll_formats)
         return self.numerify(self.generator.parse(pattern))
 
-    def phone_number(self) -> str:
-        pattern: str = self.random_element(self.formats)
+    def phone_number(self, custom_formats: Optional[List[str]] = None) -> str:
+        if custom_formats:
+            if isinstance(custom_formats, str):
+                pattern: str = self.random_element(tuple(custom_formats))
+            else:
+                pattern: str = self.random_element(custom_formats)
+        else:
+            pattern: str = self.random_element(self.formats)
+
         return self.numerify(self.generator.parse(pattern))
